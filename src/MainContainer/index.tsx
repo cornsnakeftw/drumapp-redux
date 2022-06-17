@@ -20,16 +20,17 @@ const MainContainer = () => {
   const [score, setScore] = React.useState(0);
 
   const onKeyPress = (pressed_key: string) => {
-    if (
-      pressed_key === target_keys[current_index] &&
-      current_index + 1 < target_keys.length
-    ) {
-      setCurrentIndex(current_index + 1);
-      setScore(score + 1);
-    } else if (current_index + 1 >= target_keys.length) {
+    if (current_index + 1 <= target_keys.length) {
+      if (pressed_key === target_keys[current_index]) {
+        setScore(score + 1);
+        setCurrentIndex(current_index + 1);
+      } else {
+        setScore(score - 1);
+      }
+    }
+
+    if (current_index + 1 >= target_keys.length) {
       alert("Game is complete!");
-    } else {
-      setScore(score - 1);
     }
   };
 
