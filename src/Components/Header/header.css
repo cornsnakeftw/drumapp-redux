@@ -29,3 +29,12 @@ nav > .menu-buttons > button {
 nav > .menu-buttons > button:not(:last-child) {
   margin-right: 6px;
 }
+
+button {
+  cursor: pointer;
+}
+
+button[disabled] {
+  cursor: default;
+  color: rgba(256, 256, 256, 50%);
+}
