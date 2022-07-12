@@ -9,25 +9,21 @@ function App() {
   const { app_store } = useStores();
   console.log(app_store);
 
-  const [is_recording, setIsRecording] = React.useState<boolean>(false);
-  const [is_playing_back, setIsPlayingBack] = React.useState<boolean>(false);
-  const [has_game_started, setStarted] = React.useState<boolean>(false);
-
   return (
     <div className="App">
       <Header
-        is_recording={is_recording}
-        is_playing_back={is_playing_back}
-        has_game_started={has_game_started}
-        record={setIsRecording}
-        playback={setIsPlayingBack}
-        startGame={setStarted}
+        is_recording={app_store.is_recording}
+        is_playing_back={app_store.is_playing_back}
+        has_game_started={app_store.has_game_started}
+        record={app_store.setIsRecording}
+        playback={app_store.setIsPlayingBack}
+        startGame={app_store.setStarted}
       />
       <MainContainer
-        is_recording={is_recording}
-        is_playing_back={is_playing_back}
-        has_game_started={has_game_started}
-        stopPlayback={() => setIsPlayingBack(false)}
+        is_recording={app_store.is_recording}
+        is_playing_back={app_store.is_playing_back}
+        has_game_started={app_store.has_game_started}
+        stopPlayback={() => app_store.setIsPlayingBack(false)}
       />
     </div>
   );
