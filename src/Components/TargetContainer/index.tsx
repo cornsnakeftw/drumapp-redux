@@ -1,6 +1,8 @@
 import React from "react";
 import "./target-container.css";
 import { keyConfigs, playSound } from "../../Helpers/sounds";
+import { useStores } from "../../stores";
+import { observer } from "mobx-react-lite";
 
 type TargetContainerProps = {
   active_key?: string;
@@ -13,6 +15,8 @@ const TargetContainer = ({
   setActiveKey,
   onKeyPress,
 }: TargetContainerProps) => {
+  const { main_store } = useStores();
+
   React.useEffect(() => {
     const keydownHandler = (ev: KeyboardEvent) => {
       onKeyPress(ev.key);
@@ -29,7 +33,9 @@ const TargetContainer = ({
       {keyConfigs.map((item) => (
         <div
           key={item.id}
-          className={`card control ${active_key === item.key ? "playing" : ""}`}
+          className={`card control ${
+            main_store.active_key === item.key ? "playing" : ""
+          }`}
         >
           <div className="label container">{item.key.toUpperCase()}</div>
           <div className="key container">{item.id.replace("_", " ")}</div>
@@ -39,4 +45,4 @@ const TargetContainer = ({
   );
 };
 
-export default TargetContainer;
+export default observer(TargetContainer);
