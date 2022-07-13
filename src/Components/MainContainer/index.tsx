@@ -93,11 +93,7 @@ const MainContainer = () => {
     <div className="main-container">
       <ScoreContainer />
       <SequenceContainer target_keys={target_keys} />
-      <TargetContainer
-        active_key={main_store.active_key}
-        setActiveKey={main_store.setActiveKey}
-        onKeyPress={onKeyPress}
-      />
+      <TargetContainer onKeyPress={onKeyPress} />
     </div>
   );
 };

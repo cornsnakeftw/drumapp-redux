@@ -5,22 +5,16 @@ import { useStores } from "../../stores";
 import { observer } from "mobx-react-lite";
 
 type TargetContainerProps = {
-  active_key?: string;
-  setActiveKey: (key?: string) => void;
   onKeyPress: (pressed_key: string) => void;
 };
 
-const TargetContainer = ({
-  active_key,
-  setActiveKey,
-  onKeyPress,
-}: TargetContainerProps) => {
+const TargetContainer = ({ onKeyPress }: TargetContainerProps) => {
   const { main_store } = useStores();
 
   React.useEffect(() => {
     const keydownHandler = (ev: KeyboardEvent) => {
       onKeyPress(ev.key);
-      playSound(ev.key).then(() => setActiveKey(undefined));
+      playSound(ev.key).then(() => main_store.setActiveKey(undefined));
     };
 
     document.addEventListener("keydown", keydownHandler);
