@@ -1,14 +1,9 @@
 import React from "react";
-import { observer } from "mobx-react-lite";
 import "./App.css";
 import Header from "./Components/Header";
 import MainContainer from "./Components/MainContainer";
-import { useStores } from "./stores";
 
 function App() {
-  const { app_store } = useStores();
-  console.log(app_store);
-
   const [is_recording, setIsRecording] = React.useState<boolean>(false);
   const [is_playing_back, setIsPlayingBack] = React.useState<boolean>(false);
   const [has_game_started, setStarted] = React.useState<boolean>(false);
@@ -33,4 +28,4 @@ function App() {
   );
 }
 
-export default observer(App);
+export default App;
