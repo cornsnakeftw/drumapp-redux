@@ -42,7 +42,7 @@ const MainContainer = () => {
 
       for (let i = 0; i < main_store.recordArray.length; i++) {
         const item = main_store.recordArray[i];
-        promises.push(playRecordedItem(item));
+        promises.push(main_store.playRecordedItem(item));
       }
 
       Promise.all(promises).then(() => app_store.setIsPlayingBack(false));
@@ -53,8 +53,8 @@ const MainContainer = () => {
   return (
     <div className="main-container">
       <ScoreContainer />
-      <SequenceContainer target_keys={main_store.target_keys} />
-      <TargetContainer onKeyPress={onKeyPress} />
+      <SequenceContainer />
+      <TargetContainer onKeyPress={main_store.onKeyPress} />
     </div>
   );
 };

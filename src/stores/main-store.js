@@ -26,37 +26,9 @@ export default class MainStore {
   }
 
   @action.bound
-  onKeyPress(pressed_key) {
-    const { app_store } = this.root_store;
-
-    this.setActiveKey(pressed_key);
-
-    if (!app_store.has_game_started && !app_store.is_recording) return;
-
-    if (app_store.is_recording) {
-      this.setRecordArray([
-        ...this.recordArray,
-        { key: pressed_key, time: Date.now() - this.startTime },
-      ]);
-    } else {
-      if (this.current_index + 1 <= this.target_keys.length) {
-        if (pressed_key === this.target_keys[this.current_index]) {
-          this.setScore(this.score + 1);
-          this.setCurrentIndex(this.current_index + 1);
-        } else {
-          this.setScore(this.score - 1);
-        }
-      }
-
-      if (this.current_index + 1 >= this.target_keys.length) {
-        alert("Game is complete!");
-      }
-    }
-  }
-
-  @action.bound
   onKeyPress = (pressed_key) => {
     const { app_store } = this.root_store;
+
     this.setActiveKey(pressed_key);
 
     if (!app_store.has_game_started && !app_store.is_recording) return;
@@ -81,19 +53,6 @@ export default class MainStore {
       }
     }
   };
-
-  @action.bound
-  playRecordedItem(record_item) {
-    return new Promise((resolve) => {
-      setTimeout(async () => {
-        this.setActiveKey(record_item.key);
-        await playSound(record_item.key);
-        this.setActiveKey(undefined);
-
-        resolve();
-      }, record_item.time);
-    });
-  }
 
   @action.bound
   playRecordedItem(record_item) {
